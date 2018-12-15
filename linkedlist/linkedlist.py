@@ -47,6 +47,66 @@ class Linkedlist:
         new_node.next = prev_node.next
         prev_node.next = new_node
 
+    def delete_node(self, key):
+
+        cur_node = self.head
+
+        if cur_node and cur_node.data == key:
+            self.head = cur_node.next
+            cur_node = None
+            return
+
+        prev_node = None
+
+        while cur_node and cur_node.data != key:
+            prev_node = cur_node
+            cur_node = cur_node.next
+
+        if cur_node is None:
+            print('Error')
+            return
+
+        prev_node.next = cur_node.next
+        cur_node = None
+
+    def delete_at_position(self, pos):
+
+        cur_node = self.head
+
+        if pos == 0:
+            self.head = cur_node.next
+            cur_node = None
+            return
+
+        prev_node = None
+        index = 0
+        while cur_node and index < pos:
+            prev_node = cur_node
+            cur_node = cur_node.next
+            index += 1
+
+        if cur_node is None:
+            print('Error')
+            return
+
+        prev_node.next = cur_node.next
+        cur_node = None
+
+    def len_iterative(self):
+        cur_node = self.head
+        count = 0
+
+        while cur_node:
+            count+=1
+            cur_node = cur_node.next
+
+        return count
+
+    def len_recursive(self, node):
+        if node is None:
+            return 0
+        return 1 + self.len_recursive(node.next)
+
 
 if __name__ == '__main__':
     llist = Linkedlist()
@@ -55,8 +115,16 @@ if __name__ == '__main__':
     print('---------')
     llist.prepend('B')
     llist.print_node()
+    print('length is', llist.len_iterative())
     print('---------')
     llist.insert_after_node(llist.head.next, 'E')
+    llist.print_node()
+    print('length is', llist.len_recursive(llist.head))
+    print('---------')
+    llist.delete_node('B')
+    llist.print_node()
+    print('---------')
+    llist.delete_at_position(2)
     llist.print_node()
 
 
