@@ -162,6 +162,7 @@ class Linkedlist:
             return _reverse_recursive(cur, prev)
         self.head = _reverse_recursive(cur=self.head, prev=None)
 
+    # Assume list has been sorted
     def merge_sorted(self, llist):
 
         p = self.head
@@ -196,6 +197,19 @@ class Linkedlist:
         if not q:
             s.next = p
 
+    def remove_duplicates(self):
+        cur = self.head
+        prev = None
+        cmap = {}
+        while cur:
+            cmap[cur.data] = cmap.get(cur.data, 0) + 1
+            if cmap[cur.data] > 1:
+                prev.next = cur.next
+            else:
+                prev = cur
+            cur = cur.next
+
+
 if __name__ == '__main__':
     # llist = Linkedlist()
     # llist.append('A')
@@ -228,24 +242,38 @@ if __name__ == '__main__':
     # llist.print_node()
     # print('---------')
 
+    # Merge sorted lists
+    # llist1 = Linkedlist()
+    # llist2 = Linkedlist()
+    #
+    # llist1.append(1)
+    # llist1.append(5)
+    # llist1.append(7)
+    # llist1.append(9)
+    # llist1.append(10)
+    #
+    # llist2.append(2)
+    # llist2.append(3)
+    # llist2.append(4)
+    # llist2.append(6)
+    # llist2.append(8)
+    # llist1.print_node()
+    # llist2.print_node()
+    # llist1.merge_sorted(llist2)
+    # llist1.print_node()
+
     llist1 = Linkedlist()
-    llist2 = Linkedlist()
 
     llist1.append(1)
-    llist1.append(5)
-    llist1.append(7)
-    llist1.append(9)
-    llist1.append(10)
+    llist1.append(6)
+    llist1.append(1)
+    llist1.append(4)
+    llist1.append(2)
+    llist1.append(2)
+    llist1.append(4)
+    llist1.remove_duplicates()
+    llist1.print_node()
 
-    llist2.append(2)
-    llist2.append(3)
-    llist2.append(4)
-    llist2.append(6)
-    llist2.append(8)
-    llist1.print_node()
-    llist2.print_node()
-    llist1.merge_sorted(llist2)
-    llist1.print_node()
 
 
 
