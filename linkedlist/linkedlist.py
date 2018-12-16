@@ -107,6 +107,39 @@ class Linkedlist:
             return 0
         return 1 + self.len_recursive(node.next)
 
+    def swap_node(self, key1, key2):
+        if key1 == key2:
+            return
+
+        prev1 = None
+        cur1 = self.head
+        while cur1 and cur1.data != key1:
+            prev1 = cur1
+            cur1 = cur1.next
+
+        prev2 = None
+        cur2 = self.head
+        while cur2 and cur2.data != key2:
+            prev2 = cur2
+            cur2 = cur2.next
+
+        if cur1 and cur2:
+            if prev1:
+                prev1.next = cur2
+            else:
+                self.head = cur2
+
+            if prev2:
+                prev2.next = cur1
+            else:
+                self.head = cur1
+
+            cur1.next, cur2.next = cur2.next, cur1.next
+
+        else:
+            print('error')
+            return
+
 
 if __name__ == '__main__':
     llist = Linkedlist()
@@ -120,6 +153,9 @@ if __name__ == '__main__':
     llist.insert_after_node(llist.head.next, 'E')
     llist.print_node()
     print('length is', llist.len_recursive(llist.head))
+    print('---------')
+    llist.swap_node('B', 'A')
+    llist.print_node()
     print('---------')
     llist.delete_node('B')
     llist.print_node()
