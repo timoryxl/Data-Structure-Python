@@ -140,6 +140,28 @@ class Linkedlist:
             print('error')
             return
 
+    def reverse_iterative(self):
+        prev = None
+        cur = self.head
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+        self.head = prev
+
+    def reverse_recursive(self):
+        def _reverse_recursive(cur, prev):
+            if not cur:
+                return prev
+
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+            return _reverse_recursive(cur, prev)
+        self.head = _reverse_recursive(cur=self.head, prev=None)
+
 
 if __name__ == '__main__':
     llist = Linkedlist()
@@ -162,5 +184,18 @@ if __name__ == '__main__':
     print('---------')
     llist.delete_at_position(2)
     llist.print_node()
+    print('---------')
+    llist.append('E')
+    llist.append('R')
+    llist.append('T')
+    llist.reverse_iterative()
+    llist.print_node()
+    print('---------')
+    llist.reverse_recursive()
+    llist.print_node()
+    print('---------')
+
+
+
 
 
