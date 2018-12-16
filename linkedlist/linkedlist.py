@@ -162,38 +162,90 @@ class Linkedlist:
             return _reverse_recursive(cur, prev)
         self.head = _reverse_recursive(cur=self.head, prev=None)
 
+    def merge_sorted(self, llist):
+
+        p = self.head
+        q = llist.head
+        s = None
+
+        if not p:
+            return q
+        if not q:
+            return p
+
+        if p.data < q.data:
+            s = p
+            p = p.next
+        else:
+            s = q
+            q = q.next
+        self.head = s
+
+        while p and q:
+            if p.data < q.data:
+                s.next = p
+                s = p
+                p = p.next
+            else:
+                s.next = q
+                s = q
+                q = q.next
+
+        if not p:
+            s.next = q
+        if not q:
+            s.next = p
 
 if __name__ == '__main__':
-    llist = Linkedlist()
-    llist.append('A')
-    llist.print_node()
-    print('---------')
-    llist.prepend('B')
-    llist.print_node()
-    print('length is', llist.len_iterative())
-    print('---------')
-    llist.insert_after_node(llist.head.next, 'E')
-    llist.print_node()
-    print('length is', llist.len_recursive(llist.head))
-    print('---------')
-    llist.swap_node('B', 'A')
-    llist.print_node()
-    print('---------')
-    llist.delete_node('B')
-    llist.print_node()
-    print('---------')
-    llist.delete_at_position(2)
-    llist.print_node()
-    print('---------')
-    llist.append('E')
-    llist.append('R')
-    llist.append('T')
-    llist.reverse_iterative()
-    llist.print_node()
-    print('---------')
-    llist.reverse_recursive()
-    llist.print_node()
-    print('---------')
+    # llist = Linkedlist()
+    # llist.append('A')
+    # llist.print_node()
+    # print('---------')
+    # llist.prepend('B')
+    # llist.print_node()
+    # print('length is', llist.len_iterative())
+    # print('---------')
+    # llist.insert_after_node(llist.head.next, 'E')
+    # llist.print_node()
+    # print('length is', llist.len_recursive(llist.head))
+    # print('---------')
+    # llist.swap_node('B', 'A')
+    # llist.print_node()
+    # print('---------')
+    # llist.delete_node('B')
+    # llist.print_node()
+    # print('---------')
+    # llist.delete_at_position(2)
+    # llist.print_node()
+    # print('---------')
+    # llist.append('E')
+    # llist.append('R')
+    # llist.append('T')
+    # llist.reverse_iterative()
+    # llist.print_node()
+    # print('---------')
+    # llist.reverse_recursive()
+    # llist.print_node()
+    # print('---------')
+
+    llist1 = Linkedlist()
+    llist2 = Linkedlist()
+
+    llist1.append(1)
+    llist1.append(5)
+    llist1.append(7)
+    llist1.append(9)
+    llist1.append(10)
+
+    llist2.append(2)
+    llist2.append(3)
+    llist2.append(4)
+    llist2.append(6)
+    llist2.append(8)
+    llist1.print_node()
+    llist2.print_node()
+    llist1.merge_sorted(llist2)
+    llist1.print_node()
 
 
 
