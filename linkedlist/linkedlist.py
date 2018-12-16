@@ -222,6 +222,22 @@ class Linkedlist:
         print(cur.data)
         return cur
 
+    def count_occurences_iterative(self, data):
+        cur = self.head
+        count = 0
+        while cur:
+            if cur.data == data:
+                count += 1
+            cur = cur.next
+        return count
+
+    def count_occurences_recursive(self, node, data):
+        if node is None:
+            return 0
+        if node.data == data:
+            return 1 + self.count_occurences_recursive(node.next, data)
+        else:
+            return self.count_occurences_recursive(node.next, data)
 
 
 
@@ -291,15 +307,27 @@ if __name__ == '__main__':
     # llist1.remove_duplicates()
     # llist1.print_node()
 
+    # print nth to last
+    # llist1 = Linkedlist()
+    #
+    # llist1.append('A')
+    # llist1.append('B')
+    # llist1.append('C')
+    # llist1.append('D')
+    #
+    # print(llist1.print_nth_from_last(2))
+
     llist1 = Linkedlist()
 
-    llist1.append('A')
-    llist1.append('B')
-    llist1.append('C')
-    llist1.append('D')
-
-    print(llist1.print_nth_from_last(2))
-
+    llist1.append(1)
+    llist1.append(6)
+    llist1.append(1)
+    llist1.append(4)
+    llist1.append(2)
+    llist1.append(2)
+    llist1.append(4)
+    print(llist1.count_occurences_iterative(4))
+    print(llist1.count_occurences_recursive(llist1.head, 4))
 
 
 
