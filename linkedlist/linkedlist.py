@@ -209,6 +209,22 @@ class Linkedlist:
                 prev = cur
             cur = cur.next
 
+    def print_nth_from_last(self, n):
+        length = self.len_iterative()
+        index = 0
+        cur = self.head
+        if length < n:
+            print('error')
+            return
+        while index < length - n:
+            cur = cur.next
+            index += 1
+        print(cur.data)
+        return cur
+
+
+
+
 
 if __name__ == '__main__':
     # llist = Linkedlist()
@@ -262,17 +278,27 @@ if __name__ == '__main__':
     # llist1.merge_sorted(llist2)
     # llist1.print_node()
 
+    # remove duplicates
+    # llist1 = Linkedlist()
+    #
+    # llist1.append(1)
+    # llist1.append(6)
+    # llist1.append(1)
+    # llist1.append(4)
+    # llist1.append(2)
+    # llist1.append(2)
+    # llist1.append(4)
+    # llist1.remove_duplicates()
+    # llist1.print_node()
+
     llist1 = Linkedlist()
 
-    llist1.append(1)
-    llist1.append(6)
-    llist1.append(1)
-    llist1.append(4)
-    llist1.append(2)
-    llist1.append(2)
-    llist1.append(4)
-    llist1.remove_duplicates()
-    llist1.print_node()
+    llist1.append('A')
+    llist1.append('B')
+    llist1.append('C')
+    llist1.append('D')
+
+    print(llist1.print_nth_from_last(2))
 
 
 
