@@ -90,6 +90,31 @@ class DoublyLinkedList:
                     return
             cur = cur.next
 
+    def delete_node(self, node):
+        cur = self.head
+        while cur:
+            if cur == node and cur == self.head:
+                if not cur.next:
+                    cur = None
+                    self.head = None
+                    return
+                else:
+                    cur.next.prev = None
+                    self.head = cur.next
+                    cur = None
+                    return
+            elif cur == node:
+                if cur.next:
+                    cur.prev.next = cur.next
+                    cur.next.prev = cur.prev
+                    cur = None
+                    return
+                else:
+                    cur.prev.next = None
+                    cur = None
+                    return
+            cur = cur.next
+
     def reverse(self):
         temp = None
         cur = self.head
@@ -101,20 +126,44 @@ class DoublyLinkedList:
         if temp:
             self.head = temp.prev
 
+    def remove_duplicates(self):
+        cmap = set()
+        cur = self.head
+        while cur:
+            if cur.data in cmap:
+                temp = cur.next
+                self.delete_node(cur)
+                cur = temp
+            else:
+                cmap.add(cur.data)
+                cur = cur.next
+
 
 if __name__ == '__main__':
     dllist = DoublyLinkedList()
-    dllist.prepend(1)
-    dllist.append(2)
+    # dllist.prepend(1)
+    # dllist.append(2)
     # dllist.prepend(7)
-    dllist.append(3)
-    dllist.append(4)
-    dllist.append(5)
+    # dllist.append(3)
+    # dllist.append(4)
+    # dllist.append(5)
     # dllist.add_after_node(1, 11)
     # dllist.add_after_node(2, 12)
     # dllist.add_after_node(4, 14)
     # dllist.add_before_node(2, 11)
     # dllist.add_before_node(1, 11)
     # dllist.delete(5)
-    dllist.reverse()
+    # dllist.reverse()
+    dllist.append(12)
+    dllist.append(8)
+    dllist.append(6)
+    dllist.append(6)
+    dllist.append(8)
+    dllist.append(12)
+    dllist.append(6)
+    dllist.append(8)
+    dllist.append(12)
+    dllist.append(6)
+    dllist.append(11)
+    dllist.remove_duplicates()
     dllist.print_list()
