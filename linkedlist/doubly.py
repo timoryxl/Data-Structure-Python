@@ -138,15 +138,29 @@ class DoublyLinkedList:
                 cmap.add(cur.data)
                 cur = cur.next
 
+    def pairs_with_sum(self, sum_val):
+        pairs = []
+        p = self.head
+        q = None
+        while p.next:
+            q = p.next
+            while q:
+                if p.data + q.data == sum_val:
+                    pairs.append((p.data, q.data))
+                    break
+                q = q.next
+            p = p.next
+        return pairs
+
 
 if __name__ == '__main__':
     dllist = DoublyLinkedList()
-    # dllist.prepend(1)
-    # dllist.append(2)
+    dllist.prepend(1)
+    dllist.append(2)
     # dllist.prepend(7)
-    # dllist.append(3)
-    # dllist.append(4)
-    # dllist.append(5)
+    dllist.append(3)
+    dllist.append(4)
+    dllist.append(5)
     # dllist.add_after_node(1, 11)
     # dllist.add_after_node(2, 12)
     # dllist.add_after_node(4, 14)
@@ -154,16 +168,17 @@ if __name__ == '__main__':
     # dllist.add_before_node(1, 11)
     # dllist.delete(5)
     # dllist.reverse()
-    dllist.append(12)
-    dllist.append(8)
-    dllist.append(6)
-    dllist.append(6)
-    dllist.append(8)
-    dllist.append(12)
-    dllist.append(6)
-    dllist.append(8)
-    dllist.append(12)
-    dllist.append(6)
-    dllist.append(11)
-    dllist.remove_duplicates()
-    dllist.print_list()
+    # dllist.append(12)
+    # dllist.append(8)
+    # dllist.append(6)
+    # dllist.append(6)
+    # dllist.append(8)
+    # dllist.append(12)
+    # dllist.append(6)
+    # dllist.append(8)
+    # dllist.append(12)
+    # dllist.append(6)
+    # dllist.append(11)
+    # dllist.remove_duplicates()
+    print(dllist.pairs_with_sum(5))
+    #dllist.print_list()
