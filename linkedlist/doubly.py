@@ -90,6 +90,17 @@ class DoublyLinkedList:
                     return
             cur = cur.next
 
+    def reverse(self):
+        temp = None
+        cur = self.head
+        while cur:
+            temp = cur.prev
+            cur.prev = cur.next
+            cur.next = temp
+            cur = cur.prev
+        if temp:
+            self.head = temp.prev
+
 
 if __name__ == '__main__':
     dllist = DoublyLinkedList()
@@ -104,5 +115,6 @@ if __name__ == '__main__':
     # dllist.add_after_node(4, 14)
     # dllist.add_before_node(2, 11)
     # dllist.add_before_node(1, 11)
-    dllist.delete(5)
+    # dllist.delete(5)
+    dllist.reverse()
     dllist.print_list()
