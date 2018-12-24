@@ -254,6 +254,34 @@ class Linkedlist:
         last.next = self.head
         self.head = cur
 
+    def remove_loop(self, loop_node):
+        ptr1 = self.head
+        ptr2 = loop_node
+        prev = None
+        if ptr1 == ptr2:
+            while ptr1.next != self.head:
+                ptr1 = ptr1.next
+            ptr1.next = None
+            return
+        while ptr1 != ptr2:
+            ptr1 = ptr1.next
+            prev = ptr2
+            ptr2 = ptr2.next
+        prev.next = None
+
+
+    def detect_and_remove_loop(self):
+        slow_p = fast_p = self.head
+        while slow_p and fast_p and fast_p.next:
+            slow_p = slow_p.next
+            fast_p = fast_p.next.next
+            if slow_p == fast_p:
+                self.remove_loop(slow_p)
+                return True
+        return False
+
+
+
 
 if __name__ == '__main__':
     # llist = Linkedlist()
@@ -344,17 +372,28 @@ if __name__ == '__main__':
     # print(llist1.count_occurences_recursive(llist1.head, 4))
 
     # rotate
-    llist1 = Linkedlist()
+    llist = Linkedlist()
 
-    llist1.append(1)
-    llist1.append(2)
-    llist1.append(3)
-    llist1.append(4)
-    llist1.append(5)
-    llist1.append(6)
+    # llist1.append(1)
+    # llist1.append(2)
+    # llist1.append(3)
+    # llist1.append(4)
+    # llist1.append(5)
+    # llist1.append(6)
+    #
+    # llist1.rotate(4)
+    # llist1.print_node()
 
-    llist1.rotate(4)
-    llist1.print_node()
+    llist.prepend(10)
+    llist.prepend(4)
+    llist.prepend(15)
+    llist.prepend(20)
+    llist.prepend(50)
+    # Create a loop for testing
+    llist.head.next.next.next.next.next = llist.head.next.next
+    llist.print_node()
+    llist.detect_and_remove_loop()
+    llist.print_node()
 
 
 
