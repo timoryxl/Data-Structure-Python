@@ -68,9 +68,8 @@ class BinaryTree:
     def postorder_print(self, start, traversal):
         if start:
             traversal = self.postorder_print(start.left, traversal)
-            # TODO
-            traversal += str(start.value) + '-'
             traversal = self.postorder_print(start.right, traversal)
+            traversal += str(start.value) + '-'
         return traversal
 
     def levelorder_print(self, start, traversal):
