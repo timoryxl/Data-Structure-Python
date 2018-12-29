@@ -106,6 +106,13 @@ class BinaryTree:
             traversal += str(node.value) + '-'
         return traversal
 
+    def height(self, node):
+        if node is None:
+            return -1
+        height_left = self.height(node.left)
+        height_right = self.height(node.right)
+        return 1 + max(height_left, height_right)
+
 
 if __name__ == '__main__':
     tree = BinaryTree(1)
@@ -117,5 +124,6 @@ if __name__ == '__main__':
     # tree.root.right.right = Node(7)
     # print(tree.print_tree('preorder'))
     # print(tree.print_tree('levelorder'))
-    print(tree.print_tree('reverse_levelorder'))
+    # print(tree.print_tree('reverse_levelorder'))
+    print(tree.height(tree.root))
 
