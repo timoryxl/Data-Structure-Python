@@ -1,3 +1,6 @@
+from stack.stack import Stack
+
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -42,6 +45,8 @@ class BinaryTree:
             return self.postorder_print(tree.root, '')
         elif traversal_type == 'levelorder':
             return self.levelorder_print(tree.root, '')
+        elif traversal_type == 'reverse_levelorder':
+            return self.reverse_levelorder_print(tree.root, '')
         else:
             print('Not Supported')
             return
@@ -63,6 +68,7 @@ class BinaryTree:
     def postorder_print(self, start, traversal):
         if start:
             traversal = self.postorder_print(start.left, traversal)
+            # TODO
             traversal += str(start.value) + '-'
             traversal = self.postorder_print(start.right, traversal)
         return traversal
@@ -81,6 +87,26 @@ class BinaryTree:
                 queue.enqueue(node.right)
         return traversal
 
+    def reverse_levelorder_print(self, start, traversal):
+        if start is None:
+            return
+        queue = Queue()
+        stack = Stack()
+        queue.enqueue(start)
+        while len(queue) > 0:
+            node = queue.dequeue()
+            stack.push(node)
+
+            if node.right:
+                queue.enqueue(node.right)
+            if node.left:
+                queue.enqueue(node.left)
+
+        while not stack.is_empty():
+            node = stack.pop()
+            traversal += str(node.value) + '-'
+        return traversal
+
 
 if __name__ == '__main__':
     tree = BinaryTree(1)
@@ -88,7 +114,9 @@ if __name__ == '__main__':
     tree.root.right = Node(3)
     tree.root.left.left = Node(4)
     tree.root.left.right = Node(5)
-    tree.root.right.left = Node(6)
-    tree.root.right.right = Node(7)
+    # tree.root.right.left = Node(6)
+    # tree.root.right.right = Node(7)
     # print(tree.print_tree('preorder'))
-    print(tree.print_tree('levelorder'))
+    # print(tree.print_tree('levelorder'))
+    print(tree.print_tree('reverse_levelorder'))
+
