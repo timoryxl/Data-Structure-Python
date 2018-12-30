@@ -44,6 +44,35 @@ class BST:
         elif data == cur_node.data:
             return True
 
+    def inorder_print_tree(self):
+        if self.root:
+            self._inorder_print_tree(self.root)
+
+    def _inorder_print_tree(self, cur_node):
+        if cur_node:
+            self._inorder_print_tree(cur_node.left)
+            print(cur_node.data)
+            self._inorder_print_tree(cur_node.right)
+
+    def is_bst_satistfied(self):
+        if self.root:
+            is_bst = self._is_bst_satistfied(self.root)
+            if is_bst is not None:
+                return False
+        return True
+
+    def _is_bst_satistfied(self, cur_node):
+        if cur_node.left:
+            if cur_node.data > cur_node.left.data:
+                return self._is_bst_satistfied(cur_node.left)
+            else:
+                return False
+        if cur_node.right:
+            if cur_node.data < cur_node.right.data:
+                return self._is_bst_satistfied(cur_node.right)
+            else:
+                return False
+
 
 if __name__ == '__main__':
     bst = BST()
@@ -52,4 +81,10 @@ if __name__ == '__main__':
     bst.insert(8)
     bst.insert(5)
     bst.insert(10)
-    print(bst.find(6))
+    # print(bst.find(6))
+    tree = BST()
+    tree.root = Node(1)
+    tree.root.left = Node(2)
+    tree.root.right = Node(3)
+    print(tree.is_bst_satistfied())
+    print(bst.is_bst_satistfied())
